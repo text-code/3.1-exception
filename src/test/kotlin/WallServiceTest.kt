@@ -178,8 +178,8 @@ class WallServiceTest {
     }
 
     @Test(expected = PostNotFoundException::class)
-    fun shouldThrow() {
-        val newComment = Comments(1, "test")
+    fun test_comment_should_throw() {
+        val newComment = Comments(2, "test")
         WallService.createComment(newComment)
     }
 }

@@ -13,10 +13,10 @@ object WallService {
     }
 
     fun update(postUpdate: Post): Boolean {
-        for (post in posts) {
+        for ((index, post) in posts.withIndex()) {
             if (postUpdate.id == post.id) {
                 val newPost = postUpdate.copy(ownerId = post.ownerId, date = post.date)
-                posts[post.id - 1] = newPost
+                posts[index] = newPost
                 return true
             } else if (postUpdate.id >= posts.size) {
                 return false
@@ -27,8 +27,10 @@ object WallService {
 
     fun createComment(comment: Comments): Boolean {
         for (post in posts) {
-            if (post.id == comment.id) comments += comment
-            return true
+            if (post.id == comment.id) {
+                comments += comment
+                return true
+            }
         }
         throw PostNotFoundException("Post not founded")
     }
